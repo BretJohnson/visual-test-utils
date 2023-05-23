@@ -38,11 +38,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{242601E5-1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.VisualTestUtils.Tests", "test\Microsoft.VisualTestUtils.Tests\Microsoft.VisualTestUtils.Tests.csproj", "{BD2A8C96-B06A-4D36-A95A-A08834C81BB6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.VisualTestUtils.SkiaSharp.ImageHash", "src\Microsoft.VisualTestUtils.SkiaSharp.ImageHash\Microsoft.VisualTestUtils.SkiaSharp.ImageHash.csproj", "{6C4D371A-9113-4DA9-A49E-D86FB8D9124E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.VisualTestUtils.ImageHash", "src\Microsoft.VisualTestUtils.ImageHash\Microsoft.VisualTestUtils.ImageHash.csproj", "{6C4D371A-9113-4DA9-A49E-D86FB8D9124E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.VisualTestUtils.MagickNet", "src\Microsoft.VisualTestUtils.MagickNet\Microsoft.VisualTestUtils.MagickNet.csproj", "{1E00D68D-3825-4701-98F8-8AD5963E60BB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.VisualTestUtils.Appium", "src\Microsoft.VisualTestUtils.Appium\Microsoft.VisualTestUtils.Appium.csproj", "{769D8F1F-366F-4EAB-9720-F4FE822AC207}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,10 +64,6 @@ Global
 		{1E00D68D-3825-4701-98F8-8AD5963E60BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E00D68D-3825-4701-98F8-8AD5963E60BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E00D68D-3825-4701-98F8-8AD5963E60BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{769D8F1F-366F-4EAB-9720-F4FE822AC207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{769D8F1F-366F-4EAB-9720-F4FE822AC207}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{769D8F1F-366F-4EAB-9720-F4FE822AC207}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{769D8F1F-366F-4EAB-9720-F4FE822AC207}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,7 +75,6 @@ Global
 		{BD2A8C96-B06A-4D36-A95A-A08834C81BB6} = {242601E5-11BE-46AF-ABAB-E2AD00E00F53}
 		{6C4D371A-9113-4DA9-A49E-D86FB8D9124E} = {039AD34D-47FC-44B5-8E8C-8BA71D152D38}
 		{1E00D68D-3825-4701-98F8-8AD5963E60BB} = {039AD34D-47FC-44B5-8E8C-8BA71D152D38}
-		{769D8F1F-366F-4EAB-9720-F4FE822AC207} = {039AD34D-47FC-44B5-8E8C-8BA71D152D38}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E3944F6A-384B-4B0F-B93F-3BD513DC57BD}

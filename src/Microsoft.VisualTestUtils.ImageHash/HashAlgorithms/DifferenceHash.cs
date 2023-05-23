@@ -3,7 +3,7 @@
 
 using SkiaSharp;
 
-namespace Microsoft.VisualTestUtils.SkiaSharp.ImageHash.HashAlgorithms;
+namespace Microsoft.VisualTestUtils.ImageHash.HashAlgorithms;
 
 /// <summary>
 /// Calculates the hash difference between two bitmap images.

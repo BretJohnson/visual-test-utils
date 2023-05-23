@@ -4,7 +4,7 @@
 using System.Runtime.CompilerServices;
 using SkiaSharp;
 
-namespace Microsoft.VisualTestUtils.SkiaSharp.ImageHash;
+namespace Microsoft.VisualTestUtils.ImageHash;
 
 public static class ImageHashExtensions
 {

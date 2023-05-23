@@ -3,7 +3,7 @@
 
 using SkiaSharp;
 
-namespace Microsoft.VisualTestUtils.SkiaSharp.ImageHash;
+namespace Microsoft.VisualTestUtils.ImageHash;
 
 /// <summary>
 /// Interface for perceptual image hashing algorithm.

@@ -1,9 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <PackageReadmeFile>PackageReadme.md</PackageReadmeFile>
   </PropertyGroup>
-  <ItemGroup>
-    <None Include="$(RepoRootPath)README.md" Pack="true" PackagePath="" />
-  </ItemGroup>
 </Project>
