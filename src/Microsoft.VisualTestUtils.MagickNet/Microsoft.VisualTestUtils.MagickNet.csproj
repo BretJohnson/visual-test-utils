@@ -2,12 +2,16 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <PackageReadmeFile>PackageReadme.md</PackageReadmeFile>
+    <PackageReadmeFile>package-readme.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Magick.NET-Q8-AnyCPU" />
     <ProjectReference Include="..\Microsoft.VisualTestUtils\Microsoft.VisualTestUtils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="package-readme.md" Pack="true" PackagePath=""/>
   </ItemGroup>
 
 </Project>
