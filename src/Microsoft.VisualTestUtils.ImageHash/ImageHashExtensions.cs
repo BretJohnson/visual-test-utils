@@ -6,7 +6,10 @@ using SkiaSharp;
 
 namespace Microsoft.VisualTestUtils.ImageHash;
 
-public static class ImageHashExtensions
+/// <summary>
+/// Helper methods.
+/// </summary>
+internal static class ImageHashExtensions
 {
     /// <summary>
     /// Gets the pixel row for a given Y value.

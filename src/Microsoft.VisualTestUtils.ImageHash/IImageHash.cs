@@ -11,8 +11,8 @@ namespace Microsoft.VisualTestUtils.ImageHash;
 public interface IImageHash
 {
     /// <summary>Hash the image using the algorithm.</summary>
-    /// <param name="image">image to calculate hash from.</param>
+    /// <param name="bitmap">image to calculate hash from.</param>
     /// <returns>hash value of the image.</returns>
-    /// <exception cref="ArgumentNullException">Thrown when <paramref name="image"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="bitmap"/> is <see langword="null"/>.</exception>
     ulong Hash(SKBitmap bitmap);
 }
