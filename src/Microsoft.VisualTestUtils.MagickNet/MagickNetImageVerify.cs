@@ -14,6 +14,12 @@ namespace Microsoft.VisualTestUtils.MagickNet
         private MagickFormat magickFormat;
         private IImageDirectory imageDirectory;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MagickNetImageVerify"/> class.
+        /// </summary>
+        /// <param name="imageDirectory">Directory info.</param>
+        /// <param name="error">Error metric.</param>
+        /// <param name="magickFormat">Image format.</param>
         public MagickNetImageVerify(IImageDirectory imageDirectory, ErrorMetric error = ErrorMetric.Fuzz, MagickFormat magickFormat = MagickFormat.Png)
         {
             this.imageDirectory = imageDirectory;

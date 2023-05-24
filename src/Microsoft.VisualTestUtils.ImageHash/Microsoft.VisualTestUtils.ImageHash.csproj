@@ -1,8 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <PackageReadmeFile>package-readme.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.VisualTestUtils\Microsoft.VisualTestUtils.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="package-readme.md" Pack="true" PackagePath=""/>
