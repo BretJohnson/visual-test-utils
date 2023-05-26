@@ -10,7 +10,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.VisualTestUtils\Microsoft.VisualTestUtils.csproj" />
+    <ProjectReference Include="..\VisualTestUtils\VisualTestUtils.csproj" />
   </ItemGroup>
 
   <ItemGroup>

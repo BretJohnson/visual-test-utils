@@ -6,7 +6,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using SkiaSharp;
 
-namespace Microsoft.VisualTestUtils.ImageHash.HashAlgorithms;
+namespace VisualTestUtils.ImageHash.HashAlgorithms;
 
 /// <summary>
 /// Calculates the hash difference between two bitmap images via perceptual difference.

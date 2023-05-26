@@ -3,7 +3,7 @@
 
 using ImageMagick;
 
-namespace Microsoft.VisualTestUtils.MagickNet
+namespace VisualTestUtils.MagickNet
 {
     /// <summary>
     /// Verify images using ImageMagick.

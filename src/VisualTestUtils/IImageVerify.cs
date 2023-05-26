@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microsoft.VisualTestUtils
+namespace VisualTestUtils
 {
     /// <summary>
     /// Interface for image verification.
