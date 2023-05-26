@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Microsoft.VisualTestUtils
+namespace VisualTestUtils
 {
     /// <summary>
     /// Used to read and write images to the baseline and output diff images directories.

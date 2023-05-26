@@ -3,7 +3,7 @@
 
 using SkiaSharp;
 
-namespace Microsoft.VisualTestUtils.ImageHash.HashAlgorithms;
+namespace VisualTestUtils.ImageHash.HashAlgorithms;
 
 /// <summary>
 /// Computes an average hash for an image by computing the average value of all its pixels and comparing it,

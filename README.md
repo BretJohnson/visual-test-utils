@@ -2,7 +2,7 @@
 
 ***Easily add visual regression testing to your test process***
 
-[![NuGet package](https://img.shields.io/nuget/v/Microsoft.VisualTestUtils.svg)](https://nuget.org/packages/Microsoft.VisualTestUtils)
+[![NuGet package](https://img.shields.io/nuget/v/VisualTestUtils.svg)](https://nuget.org/packages/VisualTestUtils)
 
 ## Overview
 

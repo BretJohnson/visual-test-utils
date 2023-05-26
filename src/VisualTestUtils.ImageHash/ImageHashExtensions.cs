@@ -4,7 +4,7 @@
 using System.Runtime.CompilerServices;
 using SkiaSharp;
 
-namespace Microsoft.VisualTestUtils.ImageHash;
+namespace VisualTestUtils.ImageHash;
 
 /// <summary>
 /// Helper methods.

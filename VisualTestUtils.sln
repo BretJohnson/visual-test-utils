@@ -32,15 +32,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{36CCE840-6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{039AD34D-47FC-44B5-8E8C-8BA71D152D38}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.VisualTestUtils", "src\Microsoft.VisualTestUtils\Microsoft.VisualTestUtils.csproj", "{4DE3D23D-87FE-420B-9631-2B1B07EA1B1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualTestUtils", "src\VisualTestUtils\VisualTestUtils.csproj", "{4DE3D23D-87FE-420B-9631-2B1B07EA1B1F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{242601E5-11BE-46AF-ABAB-E2AD00E00F53}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.VisualTestUtils.Tests", "test\Microsoft.VisualTestUtils.Tests\Microsoft.VisualTestUtils.Tests.csproj", "{BD2A8C96-B06A-4D36-A95A-A08834C81BB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualTestUtils.Tests", "test\VisualTestUtils.Tests\VisualTestUtils.Tests.csproj", "{BD2A8C96-B06A-4D36-A95A-A08834C81BB6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.VisualTestUtils.ImageHash", "src\Microsoft.VisualTestUtils.ImageHash\Microsoft.VisualTestUtils.ImageHash.csproj", "{6C4D371A-9113-4DA9-A49E-D86FB8D9124E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualTestUtils.ImageHash", "src\VisualTestUtils.ImageHash\VisualTestUtils.ImageHash.csproj", "{6C4D371A-9113-4DA9-A49E-D86FB8D9124E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.VisualTestUtils.MagickNet", "src\Microsoft.VisualTestUtils.MagickNet\Microsoft.VisualTestUtils.MagickNet.csproj", "{1E00D68D-3825-4701-98F8-8AD5963E60BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualTestUtils.MagickNet", "src\VisualTestUtils.MagickNet\VisualTestUtils.MagickNet.csproj", "{1E00D68D-3825-4701-98F8-8AD5963E60BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

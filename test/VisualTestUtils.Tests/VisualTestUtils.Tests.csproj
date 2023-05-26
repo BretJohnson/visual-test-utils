@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Microsoft.VisualTestUtils\Microsoft.VisualTestUtils.csproj" />
+    <ProjectReference Include="..\..\src\VisualTestUtils\VisualTestUtils.csproj" />
   </ItemGroup>
 
   <ItemGroup>
