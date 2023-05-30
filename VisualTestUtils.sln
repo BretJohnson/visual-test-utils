@@ -42,6 +42,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualTestUtils.ImageHash",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualTestUtils.MagickNet", "src\VisualTestUtils.MagickNet\VisualTestUtils.MagickNet.csproj", "{1E00D68D-3825-4701-98F8-8AD5963E60BB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualTestUtils.AppConnector", "src\VisualTestUtils.AppConnector\VisualTestUtils.AppConnector.csproj", "{158EE0B3-4917-452A-B324-5C1FA012D9F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{1E00D68D-3825-4701-98F8-8AD5963E60BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E00D68D-3825-4701-98F8-8AD5963E60BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E00D68D-3825-4701-98F8-8AD5963E60BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{158EE0B3-4917-452A-B324-5C1FA012D9F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{158EE0B3-4917-452A-B324-5C1FA012D9F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{158EE0B3-4917-452A-B324-5C1FA012D9F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{158EE0B3-4917-452A-B324-5C1FA012D9F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{BD2A8C96-B06A-4D36-A95A-A08834C81BB6} = {242601E5-11BE-46AF-ABAB-E2AD00E00F53}
 		{6C4D371A-9113-4DA9-A49E-D86FB8D9124E} = {039AD34D-47FC-44B5-8E8C-8BA71D152D38}
 		{1E00D68D-3825-4701-98F8-8AD5963E60BB} = {039AD34D-47FC-44B5-8E8C-8BA71D152D38}
+		{158EE0B3-4917-452A-B324-5C1FA012D9F0} = {039AD34D-47FC-44B5-8E8C-8BA71D152D38}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E3944F6A-384B-4B0F-B93F-3BD513DC57BD}
