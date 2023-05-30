@@ -179,5 +179,16 @@ dotnet_diagnostic.DOC202.severity = warning
 # CA1062: Validate arguments of public methods
 dotnet_diagnostic.CA1062.severity = warning
 
+#### The C# settings below are customized, differing from the normal libproject defaults
+
+# CA1062: Validate arguments of public methods
+dotnet_diagnostic.CA1062.severity = none
+
+# CS1591: Missing XML comment for publicly visible type or member 'Type_or_Member'
+dotnet_diagnostic.CS1591.severity = none
+
+# SA1600: Elements must be documented
+dotnet_diagnostic.SA1600.severity = none
+
 [*.sln]
 indent_style = tab
