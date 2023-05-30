@@ -81,7 +81,8 @@ public class AppConnectorServer : TempestServer
         lock (this.connections)
         {
             IEnumerable<IConnection> list = this.connections.Where(n => n != ogSender);
-            foreach (IConnection connection in list) {
+            foreach (IConnection connection in list)
+            {
                 connection.SendAsync(message);
             }
         }
