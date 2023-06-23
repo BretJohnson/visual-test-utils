@@ -2,7 +2,7 @@
 
 ***Easily add visual regression testing to your test process***
 
-[![NuGet package](https://img.shields.io/nuget/v/VisualTestUtils.svg)](https://nuget.org/packages/VisualTestUtils)
+[![NuGet package](https://github.com/BretJohnson/visual-test-utils/actions/workflows/build.yml/badge.svg)](https://github.com/BretJohnson/visual-test-utils/actions/workflows/build.yml)
 
 ## Overview
 
