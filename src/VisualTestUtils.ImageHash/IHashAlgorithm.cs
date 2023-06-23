@@ -8,7 +8,7 @@ namespace VisualTestUtils.ImageHash;
 /// <summary>
 /// Interface for perceptual image hashing algorithm.
 /// </summary>
-public interface IImageHash
+public interface IHashAlgorithm
 {
     /// <summary>Hash the image using the algorithm.</summary>
     /// <param name="bitmap">image to calculate hash from.</param>

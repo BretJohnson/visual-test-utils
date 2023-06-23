@@ -11,7 +11,7 @@ namespace VisualTestUtils.ImageHash.HashAlgorithms;
 /// <summary>
 /// Calculates the hash difference between two bitmap images via perceptual difference.
 /// </summary>
-public class PerceptualHash : IImageHash
+public class PerceptualHash : IHashAlgorithm
 {
     private const int SIZE = 64;
     private static readonly double Sqrt2DivSize = Math.Sqrt(2D / SIZE);
