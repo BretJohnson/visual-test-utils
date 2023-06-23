@@ -34,7 +34,7 @@
 
     <PackageProjectUrl>https://github.com/BretJohnson/visual-test-utils</PackageProjectUrl>
     <Company>Microsoft Corporation</Company>
-    <Authors>Microsoft</Authors>
+    <Authors>Bret Johnson</Authors>
     <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
