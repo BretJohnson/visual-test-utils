@@ -11,7 +11,7 @@
     <PackageVersion Include="SkiaSharp" Version="2.88.3" />
     <PackageVersion Include="Magick.NET-Q8-AnyCPU" Version="13.1.2" />
     <PackageVersion Include="Drastic.Tempest" Version="0.0.4" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
   </ItemGroup>
   <ItemGroup>
     <GlobalPackageReference Include="CSharpIsNullAnalyzer" Version="0.1.495" />
