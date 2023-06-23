@@ -9,7 +9,7 @@ namespace VisualTestUtils.ImageHash.HashAlgorithms;
 /// Computes an average hash for an image by computing the average value of all its pixels and comparing it,
 /// to each pixel in the image. Each bit is a pixel: 1 = higher than average, 0 = lower than average.
 /// </summary>
-public class AverageHash : IImageHash
+public class AverageHash : IHashAlgorithm
 {
     private const int WIDTH = 8;
     private const int HEIGHT = 8;

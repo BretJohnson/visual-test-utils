@@ -36,7 +36,7 @@ internal static class ImageHashExtensions
     /// <param name="stream">Stream should 'contain' raw image data.</param>
     /// <returns>hash value.</returns>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="hashImplementation"/> or <paramref name="stream"/> is <see langword="null"/>.</exception>
-    public static ulong Hash(this IImageHash hashImplementation, Stream stream)
+    public static ulong Hash(this IHashAlgorithm hashImplementation, Stream stream)
     {
         if (hashImplementation == null)
         {
@@ -57,7 +57,7 @@ internal static class ImageHashExtensions
     /// <param name="byteArray">ByteArray should 'contain' raw image data.</param>
     /// <returns>hash value.</returns>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="hashImplementation"/> or <paramref name="byteArray"/> is <see langword="null"/>.</exception>
-    public static ulong Hash(this IImageHash hashImplementation, byte[] byteArray)
+    public static ulong Hash(this IHashAlgorithm hashImplementation, byte[] byteArray)
     {
         if (hashImplementation == null)
         {

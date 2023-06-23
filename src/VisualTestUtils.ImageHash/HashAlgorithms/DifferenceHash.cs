@@ -8,7 +8,7 @@ namespace VisualTestUtils.ImageHash.HashAlgorithms;
 /// <summary>
 /// Calculates the hash difference between two bitmap images.
 /// </summary>
-public class DifferenceHash : IImageHash
+public class DifferenceHash : IHashAlgorithm
 {
     private const int WIDTH = 9;
     private const int HEIGHT = 8;
