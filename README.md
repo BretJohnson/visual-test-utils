@@ -2,7 +2,12 @@
 
 ***Easily add visual regression testing to your test process***
 
-[![NuGet package](https://img.shields.io/nuget/v/VisualTestUtils.svg)](https://nuget.org/packages/VisualTestUtils)
+| Package | Version |
+| ------- | ------- |
+| VisualTestUtils | [![NuGet Version](https://img.shields.io/nuget/v/VisualTestUtils.svg)](https://nuget.org/packages/VisualTestUtils) |
+| VisualTestUtils.AppConnector | [![NuGet Version](https://img.shields.io/nuget/v/VisualTestUtils.AppConnector.svg)](https://nuget.org/packages/VisualTestUtils.AppConnector) |
+| VisualTestUtils.ImageHash| [![NuGet Version](https://img.shields.io/nuget/v/VisualTestUtils.ImageHash.svg)](https://nuget.org/packages/VisualTestUtils.ImageHash) |
+| VisualTestUtils.MakickNet| [![NuGet Version](https://img.shields.io/nuget/v/VisualTestUtils.MagickNet.svg)](https://nuget.org/packages/VisualTestUtils.MagickNet) |
 
 ## Overview
 
