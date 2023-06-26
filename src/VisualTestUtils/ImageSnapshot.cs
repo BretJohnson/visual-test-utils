@@ -8,6 +8,12 @@ public class ImageSnapshot
         this.Format = format;
     }
 
+    public ImageSnapshot(string path)
+    {
+        this.Data = File.ReadAllBytes(path);
+        this.Format = ImageSnapshotFormatExtensions.GetImageFormat(path);
+    }
+
     /// <summary>
     /// Gets image data as bytes, in the associated image format.
     /// </summary>
@@ -25,13 +31,7 @@ public class ImageSnapshot
     /// <param name="fileNameBase">File name base for the saved image snapshot.</param>
     public void Save(string directory, string fileNameBase)
     {
-        string extension = this.Format switch
-        {
-            ImageSnapshotFormat.PNG => ".png",
-            ImageSnapshotFormat.JPEG => ".jpg",
-            _ => throw new InvalidOperationException($"Invalid ImageFormat value: {this.Format}"),
-        };
-
+        string extension = this.Format.GetFileExtension();
         var filePath = Path.Combine(directory, fileNameBase + extension);
         File.WriteAllBytes(filePath, this.Data);
     }
