@@ -20,7 +20,7 @@
 
         public virtual void Test(string name, ImageSnapshot actualImage)
         {
-            string imageFileName = $"{name}.{actualImage.Format.GetFileExtension()}";
+            string imageFileName = $"{name}{actualImage.Format.GetFileExtension()}";
 
             string baselineImageFile = Path.Combine(this.snapshotsBaselineDirectory, imageFileName);
 
