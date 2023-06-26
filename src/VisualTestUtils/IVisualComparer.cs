@@ -4,16 +4,16 @@
 namespace VisualTestUtils
 {
     /// <summary>
-    /// Interface for image verification.
+    /// Interface for image visual comparison.
     /// </summary>
-    public interface IVisualVerify
+    public interface IVisualComparer
     {
         /// <summary>
-        /// Verifies the image against the provided baseline.
+        /// Compare the image against the provided baseline, returning the percentage difference.
         /// </summary>
         /// <param name="baselineImage">Baseline Image Bytes.</param>
         /// <param name="actualImage">Actual Image Bytes.</param>
         /// <returns>Percentage difference.</returns>
-        double Verify(ImageSnapshot baselineImage, ImageSnapshot actualImage);
+        double Compare(ImageSnapshot baselineImage, ImageSnapshot actualImage);
     }
 }

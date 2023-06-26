@@ -8,30 +8,30 @@ namespace VisualTestUtils.ImageHash
     /// <summary>
     /// Verify images using SkiaSharp.
     /// </summary>
-    public class ImageHashVisualVerify : IVisualVerify
+    public class ImageHashVisualComparer : IVisualComparer
     {
         private IHashAlgorithm hashAlgorithm;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ImageHashVisualVerify"/> class, defaulting
+        /// Initializes a new instance of the <see cref="ImageHashVisualComparer"/> class, defaulting
         /// to use the <see cref="DifferenceHash"/> algorithm.
         /// </summary>
-        public ImageHashVisualVerify()
+        public ImageHashVisualComparer()
             : this(new DifferenceHash())
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ImageHashVisualVerify"/> class.
+        /// Initializes a new instance of the <see cref="ImageHashVisualComparer"/> class.
         /// </summary>
         /// <param name="hashAlgorithm">The Hash Algorithm.</param>
-        public ImageHashVisualVerify(IHashAlgorithm hashAlgorithm)
+        public ImageHashVisualComparer(IHashAlgorithm hashAlgorithm)
         {
             this.hashAlgorithm = hashAlgorithm;
         }
 
         /// <inheritdoc/>
-        public double Verify(ImageSnapshot baselineImage, ImageSnapshot actualImage) =>
+        public double Compare(ImageSnapshot baselineImage, ImageSnapshot actualImage) =>
             CompareHash.Similarity(this.hashAlgorithm.Hash(baselineImage.Data), this.hashAlgorithm.Hash(actualImage.Data));
     }
 }
