@@ -8,6 +8,15 @@
         private readonly double percentDifferenceThreshold;
         private readonly IVisualDiffGenerator visualDiffGenerator;
 
+        /// <summary>
+        /// Initialize visual regression testing, configured as specified.
+        /// </summary>
+        /// <param name="testRootDirectory">The root directory for the tests. This directory should have a "snapshots-baseline" subdirectory with the baseline images.</param>
+        /// <param name="visualComparer">The instance of <see cref="IVisualComparer"/> that will be used for image comparison.</param>
+        /// <param name="visualDiffGenerator">The instance of <see cref="IVisualDiffGenerator"/> that will be used for generating image diff.</param>
+        /// <param name="percentDifferenceThreshold">The maximum percent difference that is allowed between the baseline and actual snapshot images. Default value is 1.0, meaning the images must be at least 99% the same.).</param>
+        /// <param name="ciArtifactsDirectory">If running in CI, this should be set to the CI artifacts directory. When running locally, it can be null (the default). If specified, the "snapshots-diff" subdirectory will be created here,
+        /// holding any regression test failures. If not specified, "snapshots-diff" will be created in <paramref name="testRootDirectory"/>. </param>
         public VisualRegressionTester(string testRootDirectory, IVisualComparer visualComparer, IVisualDiffGenerator visualDiffGenerator, double percentDifferenceThreshold = 1.0, string? ciArtifactsDirectory = null)
         {
             this.snapshotsBaselineDirectory = Path.Combine(testRootDirectory, "snapshots-baseline");
