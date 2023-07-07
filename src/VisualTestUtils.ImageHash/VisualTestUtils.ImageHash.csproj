@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SkiaSharp" />
+    <PackageReference Include="SkiaSharp" Version="2.88.3" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\VisualTestUtils\VisualTestUtils.csproj" />
   </ItemGroup>

@@ -6,12 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Magick.NET-Q8-AnyCPU" />
-    <ProjectReference Include="..\VisualTestUtils\VisualTestUtils.csproj" />
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="13.1.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="package-readme.md" Pack="true" PackagePath=""/>
+    <None Include="package-readme.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VisualTestUtils\VisualTestUtils.csproj" />
   </ItemGroup>
 
 </Project>
