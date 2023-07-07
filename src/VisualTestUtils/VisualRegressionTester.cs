@@ -2,7 +2,7 @@
 {
     public class VisualRegressionTester
     {
-        private readonly string snapshotsBaselineDirectory;
+        private readonly string snapshotsDirectory;
         private readonly string snapshotsDiffDirectory;
         private readonly IVisualComparer visualComparer;
         private readonly double failureThreshold;
@@ -19,7 +19,7 @@
         /// holding any regression test failures. If not specified, "snapshots-diff" will be created in <paramref name="testRootDirectory"/>. </param>
         public VisualRegressionTester(string testRootDirectory, IVisualComparer visualComparer, IVisualDiffGenerator visualDiffGenerator, double failureThreshold = 0.01, string? ciArtifactsDirectory = null)
         {
-            this.snapshotsBaselineDirectory = Path.Combine(testRootDirectory, "snapshots");
+            this.snapshotsDirectory = Path.Combine(testRootDirectory, "snapshots");
             this.snapshotsDiffDirectory = Path.Combine(ciArtifactsDirectory ?? testRootDirectory, "snapshots-diff");
 
             this.visualComparer = visualComparer;
@@ -27,42 +27,67 @@
             this.failureThreshold = failureThreshold;
         }
 
-        public virtual void Test(string name, ImageSnapshot actualImage)
+        /// <summary>
+        /// Test the actual image by comparing it to the baseline image, failing if the image is different or the baseline does not exist.
+        /// On failure, the actual image will be saved to the "snapshots-diff" directory along with a diff image (if there is one) visually showing
+        /// what parts of the image are different.
+        /// </summary>
+        /// <param name="name">Image name (with no extension); it's often the same as the test name.</param>
+        /// <param name="actualImage">Actual image screenshot.</param>
+        /// <param name="environmentName">Optional name for the test environment (e.g. device type, like
+        /// "android"). If present it's used as the parent directory for the images. It not present, all images are stored directly in the "snapshots" directory.</param>
+        public virtual void Test(string name, ImageSnapshot actualImage, string? environmentName = null)
         {
             string imageFileName = $"{name}{actualImage.Format.GetFileExtension()}";
 
-            string baselineImagePath = Path.Combine(this.snapshotsBaselineDirectory, imageFileName);
+            string snapshotsEnvironmentDirectory = GetEnvironmentDirectory(this.snapshotsDirectory, environmentName);
+            string baselineImagePath = Path.Combine(snapshotsEnvironmentDirectory, imageFileName);
+
+            string diffEnvironmentDirectory = GetEnvironmentDirectory(this.snapshotsDiffDirectory, environmentName);
 
             if (!File.Exists(baselineImagePath))
             {
-                Directory.CreateDirectory(this.snapshotsDiffDirectory);
-
-                actualImage.Save(this.snapshotsDiffDirectory, name);
+                Directory.CreateDirectory(diffEnvironmentDirectory);
+                actualImage.Save(diffEnvironmentDirectory, name);
 
                 this.Fail(
-                    $"Baseline snapshot not yet created: {Path.Combine(this.snapshotsBaselineDirectory, imageFileName)}\n" +
-                    $"Ensure new snapshot is correct:    {Path.Combine(this.snapshotsDiffDirectory, imageFileName)}\n" +
-                    $"and if so, copy it to the snapshots-baseline directory." +
+                    $"Baseline snapshot not yet created: {baselineImagePath}\n" +
+                    $"Ensure new snapshot is correct:    {Path.Combine(diffEnvironmentDirectory, imageFileName)}\n" +
+                    $"and if so, copy it to the snapshots directory." +
                     $"\n" +
-                    $"Command: vdiff {this.snapshotsBaselineDirectory} {this.snapshotsDiffDirectory}\n");
+                    $"Command: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n");
 
                 return;
             }
 
-            ImageSnapshot baselineImage = new ImageSnapshot(baselineImagePath);
+            var baselineImage = new ImageSnapshot(baselineImagePath);
 
             double percentDifference = this.visualComparer.Compare(baselineImage, actualImage);
             if (percentDifference > this.failureThreshold)
             {
-                string formattedPercentDifference = string.Format("{0:0.00}", percentDifference);
+                Directory.CreateDirectory(diffEnvironmentDirectory);
+                actualImage.Save(diffEnvironmentDirectory, name);
+
+                ImageSnapshot diffImage = this.visualDiffGenerator.GenerateDiff(baselineImage, actualImage);
+                diffImage.Save(diffEnvironmentDirectory, name + "-diff");
+
+                string formattedPercentDifference = string.Format("{0:0.00}", percentDifference * 100.0);
                 this.Fail(
                     $"Snapshot different than baseline: {imageFileName} ({formattedPercentDifference}% difference)\n" +
                     $"If the correct baseline has changed (this isn't a a bug), then update the baseline image.\n" +
                     $"\n" +
-                    $"Command: vdiff {this.snapshotsBaselineDirectory} {this.snapshotsDiffDirectory}\n");
-                return;
+                    $"Command: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n");
+            }
+            else
+            {
+                // If the test passed, delete any previous diff image
+                Directory.Delete(actualImage.GetFilePath(diffEnvironmentDirectory, name));
+                Directory.Delete(Path.Combine(diffEnvironmentDirectory, name + "-diff.png"));
             }
         }
+
+        public static string GetEnvironmentDirectory(string baseDirectoryName, string? environmentName) =>
+            environmentName == null ? baseDirectoryName : Path.Combine(baseDirectoryName, environmentName);
 
         public void Fail(string message)
         {
