@@ -1,16 +1,15 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
 namespace VisualTestUtils.AppConnector.Messages;
 
 public enum AppConnectorMessageType : ushort
 {
-    TestRequest = 1,
-    TestResponse = 2,
-    ClientRegistration = 3,
-    OnScreenshotRequest = 4,
-    OnScreenshotResponse = 5,
-    AppClientDiscoveryResponse = 6,
-    AppClientDisconnect = 7,
-    AppClientConnect = 8,
+    ClientRegistration = 1,
+    AppClientDiscoveryResponse = 2,
+    AppClientConnect = 3,
+    AppClientDisconnect = 4,
+    PingControllerRequest = 5,
+    PingControllerResponse = 6,
+    PingAppRequest = 7,
+    PingAppResponse = 8,
+    InvokeAppMethodRequest = 9,
+    InvokeAppMethodResponse = 10
 }

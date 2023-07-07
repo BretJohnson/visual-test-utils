@@ -1,11 +1,14 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
 using Drastic.Tempest;
 
 namespace VisualTestUtils.AppConnector.Messages;
 
-public class TestResponseMessage : AppConnectorMessage
+public class AppRegistrationRequest : AppConnectorMessage
 {
-    public TestResponseMessage()
-        : base(AppConnectorMessageType.TestResponse)
+    public AppRegistrationRequest()
+        : base(AppConnectorMessageType.ClientRegistration)
     {
     }
 

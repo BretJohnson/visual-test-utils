@@ -13,6 +13,12 @@ public abstract class AppConnectorMessage : Message
     public string Id { get; internal set; }
 
     /// <inheritdoc/>
+    public override string ToString()
+    {
+        return $"{this.Id}: {this.GetType().Name}";
+    }
+
+    /// <inheritdoc/>
     public override void ReadPayload(ISerializationContext context, IValueReader reader)
     {
         this.Id = reader.ReadString();
@@ -22,11 +28,5 @@ public abstract class AppConnectorMessage : Message
     public override void WritePayload(ISerializationContext context, IValueWriter writer)
     {
         writer.WriteString(this.Id);
-    }
-
-    /// <inheritdoc/>
-    public override string ToString()
-    {
-        return $"{this.Id}: {this.GetType().ToString()}";
     }
 }

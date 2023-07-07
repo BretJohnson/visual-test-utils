@@ -1,26 +1,29 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
 using Drastic.Tempest;
+using System.Text;
 
 namespace VisualTestUtils.AppConnector.Messages;
 
-public class ClientRegistrationMessage : AppConnectorMessage
+public class PingControllerRequest : AppConnectorMessage
 {
-    public ClientRegistrationMessage()
-        : base(AppConnectorMessageType.ClientRegistration)
+    public string SenderName { get; internal set; }
+
+    public PingControllerRequest(string senderName = "")
+        : base(AppConnectorMessageType.PingAppRequest)
     {
+        this.SenderName = senderName;
     }
 
     /// <inheritdoc/>
     public override void ReadPayload(ISerializationContext context, IValueReader reader)
     {
+        this.SenderName = reader.ReadString(Encoding.UTF8);
         base.ReadPayload(context, reader);
     }
 
     /// <inheritdoc/>
     public override void WritePayload(ISerializationContext context, IValueWriter writer)
     {
+        writer.WriteString(Encoding.UTF8, this.SenderName);
         base.WritePayload(context, writer);
     }
 }

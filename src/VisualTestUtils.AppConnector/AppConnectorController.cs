@@ -4,39 +4,27 @@ using VisualTestUtils.AppConnector.Messages;
 
 namespace VisualTestUtils.AppConnector;
 
-public class AppConnectorServer : TempestServer
+public class AppConnectorController : TempestServer
 {
     private readonly ILogger? logger;
     private readonly List<IConnection> connections = new List<IConnection>();
 
-    public AppConnectorServer(IConnectionProvider provider, ILogger? logger = default)
+    public AppConnectorController(IConnectionProvider provider, ILogger? logger = default)
         : base(provider, MessageTypes.Reliable)
     {
         this.logger = logger;
 
-        this.RegisterMessageHandler<TestRequestMessage>(this.OnTestRequestMessage);
-        this.RegisterMessageHandler<TestResponseMessage>(this.OnTestResponseMessage);
-        this.RegisterMessageHandler<ClientRegistrationMessage>(this.OnClientRegistration);
+        this.RegisterMessageHandler<PingAppResponse>(this.OnPingClientResponse);
+        this.RegisterMessageHandler<AppRegistrationRequest>(this.OnClientRegistration);
     }
 
-#if LATER
-    public void SendScreenshotRequest()
+    public void SendPingClientRequest(string senderName)
     {
-        this.SendToAll(new OnScreenshotRequestMessage());
-    }
-
-    private void OnScreenshotResponse(MessageEventArgs<OnScreenshotResponseMessage> obj)
-    {
-        foreach (var item in obj.Message.ScreenShots)
+        this.SendToAll(new PingAppRequest()
         {
-            var outputName = !string.IsNullOrEmpty(item.Name) ? item.Name : obj.Message.Id;
-            var filename = $"{outputName}.png";
-            var output = Path.Combine(this.outputDirectory, filename);
-            File.WriteAllBytes(output, item.Image);
-            this.logger?.LogInformation($"Saved {output}");
-        }
+             SenderName = senderName
+        });
     }
-#endif
 
     /// <inheritdoc/>
     protected override void OnConnectionMade(object sender, ConnectionMadeEventArgs e)
@@ -62,17 +50,9 @@ public class AppConnectorServer : TempestServer
         base.OnConnectionDisconnected(sender, e);
     }
 
-    private void OnTestResponseMessage(MessageEventArgs<TestResponseMessage> args)
+    private void OnPingClientResponse(MessageEventArgs<PingAppResponse> args)
     {
         this.logger?.LogInformation(args.Message.ToString());
-
-        this.SendToAll(args.Message, args.Connection);
-    }
-
-    private void OnTestRequestMessage(MessageEventArgs<TestRequestMessage> args)
-    {
-        this.logger?.LogInformation(args.Message.ToString());
-
         this.SendToAll(args.Message, args.Connection);
     }
 
@@ -88,9 +68,9 @@ public class AppConnectorServer : TempestServer
         }
     }
 
-    private void OnClientRegistration(MessageEventArgs<ClientRegistrationMessage> args)
+    private void OnClientRegistration(MessageEventArgs<AppRegistrationRequest> args)
     {
-        ClientRegistrationMessage clientMessage = args.Message;
+        AppRegistrationRequest clientMessage = args.Message;
         this.logger?.LogInformation("Client ID {cliendId} registered", clientMessage.Id);
     }
 }
