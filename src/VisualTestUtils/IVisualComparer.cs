@@ -1,7 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
-namespace VisualTestUtils
+﻿namespace VisualTestUtils
 {
     /// <summary>
     /// Interface for image visual comparison.
@@ -9,7 +6,7 @@ namespace VisualTestUtils
     public interface IVisualComparer
     {
         /// <summary>
-        /// Compare the image against the provided baseline, returning the percentage difference.
+        /// Compare the image against the provided baseline, returning the percentage difference (1.0 = 100%).
         /// </summary>
         /// <param name="baselineImage">Baseline Image Bytes.</param>
         /// <param name="actualImage">Actual Image Bytes.</param>

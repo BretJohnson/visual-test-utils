@@ -32,6 +32,6 @@ namespace VisualTestUtils.ImageHash
 
         /// <inheritdoc/>
         public double Compare(ImageSnapshot baselineImage, ImageSnapshot actualImage) =>
-            CompareHash.Similarity(this.hashAlgorithm.Hash(baselineImage.Data), this.hashAlgorithm.Hash(actualImage.Data));
+            CompareHash.Similarity(this.hashAlgorithm.Hash(baselineImage.Data), this.hashAlgorithm.Hash(actualImage.Data)) / 100.0;
     }
 }

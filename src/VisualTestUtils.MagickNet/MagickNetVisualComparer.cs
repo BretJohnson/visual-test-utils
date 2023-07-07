@@ -1,7 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
-using ImageMagick;
+﻿using ImageMagick;
 
 namespace VisualTestUtils.MagickNet
 {
@@ -27,7 +24,7 @@ namespace VisualTestUtils.MagickNet
             var magickBaselineImage = new MagickImage(baselineImage.Data);
             var magickActualImage = new MagickImage(actualImage.Data);
 
-            return magickBaselineImage.Compare(magickActualImage, this.errorMetric, Channels.Red) * 100.0;
+            return magickBaselineImage.Compare(magickActualImage, this.errorMetric, Channels.Red);
         }
     }
 }

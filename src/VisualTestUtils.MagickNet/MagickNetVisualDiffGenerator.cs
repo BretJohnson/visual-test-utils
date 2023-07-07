@@ -25,7 +25,7 @@ namespace VisualTestUtils.MagickNet
             MagickImage magickDiffImage = new MagickImage();
             magickDiffImage.Format = MagickFormat.Png;
 
-            double percentageDifference = magickBaselineImage.Compare(magickActualImage, this.errorMetric, magickDiffImage, Channels.Red) * 100.0;
+            double percentageDifference = magickBaselineImage.Compare(magickActualImage, this.errorMetric, magickDiffImage, Channels.Red);
 
             return new ImageSnapshot(magickDiffImage.ToByteArray(), ImageSnapshotFormat.PNG);
         }
