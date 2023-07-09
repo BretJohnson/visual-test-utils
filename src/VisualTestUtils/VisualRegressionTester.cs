@@ -36,7 +36,7 @@
         /// <param name="actualImage">Actual image screenshot.</param>
         /// <param name="environmentName">Optional name for the test environment (e.g. device type, like
         /// "android"). If present it's used as the parent directory for the images. It not present, all images are stored directly in the "snapshots" directory.</param>
-        public virtual void Test(string name, ImageSnapshot actualImage, string? environmentName = null)
+        public virtual void VerifyMatchesSnapshot(string name, ImageSnapshot actualImage, string? environmentName = null)
         {
             string imageFileName = $"{name}{actualImage.Format.GetFileExtension()}";
 
