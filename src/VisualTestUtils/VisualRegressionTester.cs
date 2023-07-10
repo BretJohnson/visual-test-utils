@@ -1,4 +1,6 @@
-﻿namespace VisualTestUtils
+﻿using System.Runtime.InteropServices;
+
+namespace VisualTestUtils
 {
     public class VisualRegressionTester
     {
@@ -51,14 +53,18 @@
                 Directory.CreateDirectory(diffEnvironmentDirectory);
                 actualImage.Save(diffEnvironmentDirectory, name);
 
+                string copyCommand = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "copy" : "cp";
+
                 this.Fail(
                     $"Baseline snapshot not yet created: {baselineImagePath}\n" +
                     $"Ensure new snapshot is correct:    {Path.Combine(diffEnvironmentDirectory, imageFileName)}\n" +
                     $"and if it is, copy it to the 'snapshots' directory.\n" +
                     $"\n" +
-                    $"Diff commands:\n" +
-                    $"This file: vdiff {baselineImagePath} {diffDirectoryImagePath}\n" +
-                    $"All files: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n");
+                    $"Commands:\n" +
+                    $"View this file: vview {diffDirectoryImagePath}\n" +
+                    $"Add this file:  {copyCommand} {diffDirectoryImagePath} {snapshotsEnvironmentDirectory}\n" +
+                    $"Diff all files: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n" +
+                    $"More info:      https://aka.ms/visual-test-utils\n");
 
                 return;
             }
@@ -79,15 +85,16 @@
                     $"Snapshot different than baseline: {imageFileName} ({formattedPercentDifference}% difference)\n" +
                     $"If the correct baseline has changed (this isn't a a bug), then update the baseline image.\n" +
                     $"\n" +
-                    $"Diff commands:\n" +
-                    $"This file: vdiff {baselineImagePath} {diffDirectoryImagePath}\n" +
-                    $"All files: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n");
+                    $"Commands:\n" +
+                    $"Diff this file: vdiff {baselineImagePath} {diffDirectoryImagePath}\n" +
+                    $"Diff all files: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n" +
+                    $"More info:      https://aka.ms/visual-test-utils\n");
             }
             else
             {
                 // If the test passed, delete any previous diff image
-                this.DeleteIfExists(Path.Combine(diffDirectoryImagePath));
-                this.DeleteIfExists(Path.Combine(diffEnvironmentDirectory, name + "-diff.png"));
+                this.DeleteFileIfExists(Path.Combine(diffDirectoryImagePath));
+                this.DeleteFileIfExists(Path.Combine(diffEnvironmentDirectory, name + "-diff.png"));
             }
         }
 
@@ -95,11 +102,11 @@
         /// Delete the specified file. If the file doesn't exist, nothing happens.
         /// </summary>
         /// <param name="path">Path to file to delete.</param>
-        private void DeleteIfExists(string path)
+        private void DeleteFileIfExists(string path)
         {
             if (File.Exists(path))
             {
-                Directory.Delete(path);
+                File.Delete(path);
             }
         }
 
