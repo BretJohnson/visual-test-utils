@@ -54,7 +54,7 @@
                 this.Fail(
                     $"Baseline snapshot not yet created: {baselineImagePath}\n" +
                     $"Ensure new snapshot is correct:    {Path.Combine(diffEnvironmentDirectory, imageFileName)}\n" +
-                    $"and if so, copy it to the snapshots directory.\n" +
+                    $"and if it is, copy it to the 'snapshots' directory.\n" +
                     $"\n" +
                     $"Diff commands:\n" +
                     $"This file: vdiff {baselineImagePath} {diffDirectoryImagePath}\n" +
