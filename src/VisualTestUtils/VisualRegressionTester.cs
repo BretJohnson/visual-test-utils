@@ -14,10 +14,10 @@
         /// <param name="testRootDirectory">The root directory for the tests. This directory should have a "snapshots" subdirectory with the baseline images.</param>
         /// <param name="visualComparer">The instance of <see cref="IVisualComparer"/> that will be used for image comparison.</param>
         /// <param name="visualDiffGenerator">The instance of <see cref="IVisualDiffGenerator"/> that will be used for generating image diff.</param>
-        /// <param name="failureThreshold">The maximum percent difference that is allowed between the baseline and actual snapshot images. Default value is .01, meaning the images must be at least 99% the same.).</param>
+        /// <param name="failureThreshold">The maximum percent difference that is allowed between the baseline and actual snapshot images. Default value is .005, meaning the images must be at least 99.5% the same.).</param>
         /// <param name="ciArtifactsDirectory">If running in CI, this should be set to the CI artifacts directory. When running locally, it can be null (the default). If specified, the "snapshots-diff" subdirectory will be created here,
         /// holding any regression test failures. If not specified, "snapshots-diff" will be created in <paramref name="testRootDirectory"/>. </param>
-        public VisualRegressionTester(string testRootDirectory, IVisualComparer visualComparer, IVisualDiffGenerator visualDiffGenerator, double failureThreshold = 0.01, string? ciArtifactsDirectory = null)
+        public VisualRegressionTester(string testRootDirectory, IVisualComparer visualComparer, IVisualDiffGenerator visualDiffGenerator, double failureThreshold = 0.005, string? ciArtifactsDirectory = null)
         {
             this.snapshotsDirectory = Path.Combine(testRootDirectory, "snapshots");
             this.snapshotsDiffDirectory = Path.Combine(ciArtifactsDirectory ?? testRootDirectory, "snapshots-diff");
@@ -44,6 +44,7 @@
             string baselineImagePath = Path.Combine(snapshotsEnvironmentDirectory, imageFileName);
 
             string diffEnvironmentDirectory = GetEnvironmentDirectory(this.snapshotsDiffDirectory, environmentName);
+            string diffDirectoryImagePath = Path.Combine(diffEnvironmentDirectory, imageFileName);
 
             if (!File.Exists(baselineImagePath))
             {
@@ -53,9 +54,11 @@
                 this.Fail(
                     $"Baseline snapshot not yet created: {baselineImagePath}\n" +
                     $"Ensure new snapshot is correct:    {Path.Combine(diffEnvironmentDirectory, imageFileName)}\n" +
-                    $"and if so, copy it to the snapshots directory." +
+                    $"and if so, copy it to the snapshots directory.\n" +
                     $"\n" +
-                    $"Command: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n");
+                    $"Diff commands:\n" +
+                    $"This file: vdiff {baselineImagePath} {diffDirectoryImagePath}\n" +
+                    $"All files: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n");
 
                 return;
             }
@@ -76,13 +79,27 @@
                     $"Snapshot different than baseline: {imageFileName} ({formattedPercentDifference}% difference)\n" +
                     $"If the correct baseline has changed (this isn't a a bug), then update the baseline image.\n" +
                     $"\n" +
-                    $"Command: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n");
+                    $"Diff commands:\n" +
+                    $"This file: vdiff {baselineImagePath} {diffDirectoryImagePath}\n" +
+                    $"All files: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n");
             }
             else
             {
                 // If the test passed, delete any previous diff image
-                Directory.Delete(actualImage.GetFilePath(diffEnvironmentDirectory, name));
-                Directory.Delete(Path.Combine(diffEnvironmentDirectory, name + "-diff.png"));
+                this.DeleteIfExists(Path.Combine(diffDirectoryImagePath));
+                this.DeleteIfExists(Path.Combine(diffEnvironmentDirectory, name + "-diff.png"));
+            }
+        }
+
+        /// <summary>
+        /// Delete the specified file. If the file doesn't exist, nothing happens.
+        /// </summary>
+        /// <param name="path">Path to file to delete.</param>
+        private void DeleteIfExists(string path)
+        {
+            if (File.Exists(path))
+            {
+                Directory.Delete(path);
             }
         }
 
