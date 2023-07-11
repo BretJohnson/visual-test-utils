@@ -11,6 +11,6 @@
         /// <param name="baselineImage">Baseline Image Bytes.</param>
         /// <param name="actualImage">Actual Image Bytes.</param>
         /// <returns>Percentage difference.</returns>
-        double Compare(ImageSnapshot baselineImage, ImageSnapshot actualImage);
+        ImageDifference? Compare(ImageSnapshot baselineImage, ImageSnapshot actualImage);
     }
 }
