@@ -8,6 +8,7 @@ namespace VisualTestUtils
         private readonly string snapshotsDiffDirectory;
         private readonly IVisualComparer visualComparer;
         private readonly IVisualDiffGenerator visualDiffGenerator;
+        private readonly bool isCI;
 
         /// <summary>
         /// Initialize visual regression testing, configured as specified.
@@ -19,6 +20,12 @@ namespace VisualTestUtils
         /// holding any regression test failures. If not specified, "snapshots-diff" will be created in <paramref name="testRootDirectory"/>. </param>
         public VisualRegressionTester(string testRootDirectory, IVisualComparer visualComparer, IVisualDiffGenerator visualDiffGenerator, string? ciArtifactsDirectory = null)
         {
+            // Ensure the paths are absolute
+            testRootDirectory = Path.GetFullPath(testRootDirectory);
+            ciArtifactsDirectory = ciArtifactsDirectory != null ? Path.GetFullPath(ciArtifactsDirectory) : null;
+
+            this.isCI = ciArtifactsDirectory != null;
+
             this.snapshotsDirectory = Path.Combine(testRootDirectory, "snapshots");
             this.snapshotsDiffDirectory = Path.Combine(ciArtifactsDirectory ?? testRootDirectory, "snapshots-diff");
 
@@ -52,16 +59,29 @@ namespace VisualTestUtils
 
                 string copyCommand = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "copy" : "cp";
 
-                this.Fail(
-                    $"Baseline snapshot not yet created: {baselineImagePath}\n" +
-                    $"Ensure new snapshot is correct:    {Path.Combine(diffEnvironmentDirectory, imageFileName)}\n" +
-                    $"and if it is, copy it to the 'snapshots' directory.\n" +
-                    $"\n" +
-                    $"Commands:\n" +
-                    $"View this file: vview {diffDirectoryImagePath}\n" +
-                    $"Add this file:  {copyCommand} {diffDirectoryImagePath} {snapshotsEnvironmentDirectory}{Path.DirectorySeparatorChar}\n" +
-                    $"Diff all files: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n" +
-                    $"More info:      https://aka.ms/visual-test-workflow\n");
+                if (! this.isCI)
+                {
+                    this.Fail(
+                        $"Baseline snapshot not yet created: {baselineImagePath}\n" +
+                        $"Ensure new snapshot is correct:    {Path.Combine(diffEnvironmentDirectory, imageFileName)}\n" +
+                        $"  and if it is, copy it to the 'snapshots' directory.\n" +
+                        $"\n" +
+                        $"Commands:\n" +
+                        $"View this file: vview {diffDirectoryImagePath}\n" +
+                        $"Add this file:  {copyCommand} {diffDirectoryImagePath} {snapshotsEnvironmentDirectory}{Path.DirectorySeparatorChar}\n" +
+                        $"Diff all files: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n" +
+                        $"More info:      https://aka.ms/visual-test-workflow\n");
+                }
+                else
+                {
+                    this.Fail(
+                        $"Baseline snapshot not yet created: {baselineImagePath}\n" +
+                        $"Ensure new snapshot is correct:    {Path.Combine(diffEnvironmentDirectory, imageFileName)}\n" +
+                        $"  and if it is, push a change to add it to the 'snapshots' directory.\n" +
+                        $"Download the build artifacts to get the image.\n" +
+                        $"\n" +
+                        $"More info: https://aka.ms/visual-test-workflow\n");
+                }
 
                 return;
             }
@@ -77,14 +97,26 @@ namespace VisualTestUtils
                 ImageSnapshot diffImage = this.visualDiffGenerator.GenerateDiff(baselineImage, actualImage);
                 diffImage.Save(diffEnvironmentDirectory, name + "-diff");
 
-                this.Fail(
-                    $"Snapshot different than baseline: {imageFileName} ({imageDifference.Description})\n" +
-                    $"If the correct baseline has changed (this isn't a a bug), then update the baseline image.\n" +
-                    $"\n" +
-                    $"Commands:\n" +
-                    $"Diff this file: vdiff {baselineImagePath} {diffDirectoryImagePath}\n" +
-                    $"Diff all files: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n" +
-                    $"More info:      https://aka.ms/visual-test-workflow\n");
+                if (! this.isCI)
+                {
+                    this.Fail(
+                        $"Snapshot different than baseline: {imageFileName} ({imageDifference.Description})\n" +
+                        $"If the correct baseline has changed (this isn't a a bug), then update the baseline image.\n" +
+                        $"\n" +
+                        $"Commands:\n" +
+                        $"Diff this file: vdiff {baselineImagePath} {diffDirectoryImagePath}\n" +
+                        $"Diff all files: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n" +
+                        $"More info:      https://aka.ms/visual-test-workflow\n");
+                }
+                else
+                {
+                    this.Fail(
+                        $"Snapshot different than baseline: {imageFileName} ({imageDifference.Description})\n" +
+                        $"If the correct baseline has changed (this isn't a a bug), then update the baseline image.\n" +
+                        $"Download the build artifacts to get the new image.\n" +
+                        $"\n" +
+                        $"More info: https://aka.ms/visual-test-workflow\n");
+                }
             }
             else
             {
