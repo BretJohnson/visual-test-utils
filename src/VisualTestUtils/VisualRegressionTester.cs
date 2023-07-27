@@ -61,7 +61,7 @@ namespace VisualTestUtils
                     $"View this file: vview {diffDirectoryImagePath}\n" +
                     $"Add this file:  {copyCommand} {diffDirectoryImagePath} {snapshotsEnvironmentDirectory}{Path.DirectorySeparatorChar}\n" +
                     $"Diff all files: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n" +
-                    $"More info:      https://aka.ms/visual-test-utils\n");
+                    $"More info:      https://aka.ms/visual-test-workflow\n");
 
                 return;
             }
@@ -84,7 +84,7 @@ namespace VisualTestUtils
                     $"Commands:\n" +
                     $"Diff this file: vdiff {baselineImagePath} {diffDirectoryImagePath}\n" +
                     $"Diff all files: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n" +
-                    $"More info:      https://aka.ms/visual-test-utils\n");
+                    $"More info:      https://aka.ms/visual-test-workflow\n");
             }
             else
             {
