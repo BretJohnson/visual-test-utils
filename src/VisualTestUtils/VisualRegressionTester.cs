@@ -59,7 +59,7 @@ namespace VisualTestUtils
                     $"\n" +
                     $"Commands:\n" +
                     $"View this file: vview {diffDirectoryImagePath}\n" +
-                    $"Add this file:  {copyCommand} {diffDirectoryImagePath} {snapshotsEnvironmentDirectory}\n" +
+                    $"Add this file:  {copyCommand} {diffDirectoryImagePath} {snapshotsEnvironmentDirectory}{Path.DirectorySeparatorChar}\n" +
                     $"Diff all files: vdiff {this.snapshotsDirectory} {this.snapshotsDiffDirectory}\n" +
                     $"More info:      https://aka.ms/visual-test-utils\n");
 
