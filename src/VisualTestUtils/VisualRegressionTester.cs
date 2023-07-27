@@ -42,7 +42,9 @@ namespace VisualTestUtils
         /// <param name="actualImage">Actual image screenshot.</param>
         /// <param name="environmentName">Optional name for the test environment (e.g. device type, like
         /// "android"). If present it's used as the parent directory for the images. It not present, all images are stored directly in the "snapshots" directory.</param>
-        public virtual void VerifyMatchesSnapshot(string name, ImageSnapshot actualImage, string? environmentName = null)
+        /// <param name="testContext">Optional client provied test context, used to attach screenshots/diff images to failed tests if supported by client test framework</param>
+        public virtual void VerifyMatchesSnapshot(string name, ImageSnapshot actualImage, string? environmentName = null,
+            ITestContext? testContext = null)
         {
             string imageFileName = $"{name}{actualImage.Format.GetFileExtension()}";
 
@@ -51,11 +53,15 @@ namespace VisualTestUtils
 
             string diffEnvironmentDirectory = GetEnvironmentDirectory(this.snapshotsDiffDirectory, environmentName);
             string diffDirectoryImagePath = Path.Combine(diffEnvironmentDirectory, imageFileName);
+            string diffDirectoryDiffImagePath = Path.Combine(diffEnvironmentDirectory, name + "-diff.png");
+            string ciGetImagesText = testContext != null ? "See test attachment or download the build artifacts to get the new snapshot file." : "Download the build artifacts to get the new snapshot files.";
 
             if (!File.Exists(baselineImagePath))
             {
                 Directory.CreateDirectory(diffEnvironmentDirectory);
                 actualImage.Save(diffEnvironmentDirectory, name);
+
+                testContext?.AddTestAttachment(diffDirectoryImagePath);
 
                 string copyCommand = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "copy" : "cp";
 
@@ -63,7 +69,7 @@ namespace VisualTestUtils
                 {
                     this.Fail(
                         $"Baseline snapshot not yet created: {baselineImagePath}\n" +
-                        $"Ensure new snapshot is correct:    {Path.Combine(diffEnvironmentDirectory, imageFileName)}\n" +
+                        $"Ensure new snapshot is correct:    {diffDirectoryImagePath}\n" +
                         $"  and if it is, copy it to the 'snapshots' directory.\n" +
                         $"\n" +
                         $"Commands:\n" +
@@ -76,9 +82,9 @@ namespace VisualTestUtils
                 {
                     this.Fail(
                         $"Baseline snapshot not yet created: {baselineImagePath}\n" +
-                        $"Ensure new snapshot is correct:    {Path.Combine(diffEnvironmentDirectory, imageFileName)}\n" +
+                        $"Ensure new snapshot is correct:    {diffDirectoryImagePath}\n" +
                         $"  and if it is, push a change to add it to the 'snapshots' directory.\n" +
-                        $"Download the build artifacts to get the image.\n" +
+                        $"{ciGetImagesText}\n" +
                         $"\n" +
                         $"More info: https://aka.ms/visual-test-workflow\n");
                 }
@@ -97,6 +103,9 @@ namespace VisualTestUtils
                 ImageSnapshot diffImage = this.visualDiffGenerator.GenerateDiff(baselineImage, actualImage);
                 diffImage.Save(diffEnvironmentDirectory, name + "-diff");
 
+                testContext?.AddTestAttachment(diffDirectoryImagePath);
+                testContext?.AddTestAttachment(diffDirectoryDiffImagePath);
+
                 if (! this.isCI)
                 {
                     this.Fail(
@@ -113,7 +122,7 @@ namespace VisualTestUtils
                     this.Fail(
                         $"Snapshot different than baseline: {imageFileName} ({imageDifference.Description})\n" +
                         $"If the correct baseline has changed (this isn't a a bug), then update the baseline image.\n" +
-                        $"Download the build artifacts to get the new image.\n" +
+                        $"{ciGetImagesText}\n" +
                         $"\n" +
                         $"More info: https://aka.ms/visual-test-workflow\n");
                 }
@@ -121,8 +130,8 @@ namespace VisualTestUtils
             else
             {
                 // If the test passed, delete any previous diff image
-                this.DeleteFileIfExists(Path.Combine(diffDirectoryImagePath));
-                this.DeleteFileIfExists(Path.Combine(diffEnvironmentDirectory, name + "-diff.png"));
+                this.DeleteFileIfExists(diffDirectoryImagePath);
+                this.DeleteFileIfExists(diffDirectoryDiffImagePath);
             }
         }
 
