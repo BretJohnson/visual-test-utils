@@ -26,7 +26,7 @@
     <!-- Local builds should embed PDBs so we never lose them when a subsequent build occurs. -->
     <DebugType Condition=" '$(CI)' != 'true' and '$(TF_BUILD)' != 'true' ">embedded</DebugType>
 
-    <!-- Don't strong name currently, since Tempest isn't strong named -->
+    <!-- Don't strong name currently, not until there's a need for it -->
     <!--
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)strongname.snk</AssemblyOriginatorKeyFile>

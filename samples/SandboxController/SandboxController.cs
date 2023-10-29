@@ -1,16 +1,13 @@
-﻿using Drastic.Tempest;
+﻿using System.Net;
 using Microsoft.Extensions.Logging;
-using VisualTestUtils.AppConnector;
+using VisualTestUtils.AppConnector.Controller;
 
 namespace SandboxServer;
 
 public class SandboxController : AppConnectorController
 {
-    private readonly ILogger? logger;
-
-    public SandboxController(IConnectionProvider provider, ILogger? logger = default)
-        : base(provider, logger)
+    public SandboxController(IPAddress ipAddress, int port = 4243, ILogger? logger = null)
+        : base(ipAddress, port, logger)
     {
-        this.logger = logger;
     }
 }
