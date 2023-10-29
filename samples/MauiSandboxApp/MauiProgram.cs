@@ -1,11 +1,12 @@
-﻿using Drastic.Tempest;
-using Microsoft.Extensions.Logging;
-using VisualTestUtils.AppConnector;
+﻿using Microsoft.Extensions.Logging;
+using VisualTestUtils.AppConnector.App;
 
 namespace MauiSandboxApp
 {
     public static class MauiProgram
     {
+        private static AppConnectorApp? _appConnectorApp;
+
         public static MauiApp CreateMauiApp()
         {
             MauiAppBuilder builder = MauiApp.CreateBuilder();
@@ -22,6 +23,15 @@ namespace MauiSandboxApp
 #endif
 
             return builder.Build();
+        }
+
+        public static void StartAppConnector()
+        {
+            if (_appConnectorApp == null)
+            {
+                _appConnectorApp = new AppConnectorApp(new AppService());
+                _ = _appConnectorApp.StartClientAsync();
+            }
         }
     }
 }

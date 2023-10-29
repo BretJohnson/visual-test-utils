@@ -1,32 +1,26 @@
-﻿using Drastic.Tempest;
-using VisualTestUtils.AppConnector;
-
-namespace MauiSandboxApp
+﻿namespace MauiSandboxApp
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        int _count = 0;
 
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            var client = new AppConnectorApp("TestClient");
-            // 8888 = port number
-            // Async Command, can be fired off on any thread.
-            client.ConnectAsync(new Target("10.0.0.71", 8888));
+            MauiProgram.StartAppConnector();
         }
 
         private void OnCounterClicked(object sender, EventArgs e)
         {
-            this.count++;
+            _count++;
 
-            if (this.count == 1)
-                this.CounterBtn.Text = $"Clicked {this.count} time";
+            if (_count == 1)
+                CounterBtn.Text = $"Clicked {_count} time";
             else
-                this.CounterBtn.Text = $"Clicked {this.count} times";
+                CounterBtn.Text = $"Clicked {_count} times";
 
-            SemanticScreenReader.Announce(this.CounterBtn.Text);
+            SemanticScreenReader.Announce(CounterBtn.Text);
         }
     }
 }

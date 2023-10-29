@@ -7,6 +7,7 @@ using Sharprompt;
 using SandboxServer.Services;
 using SandboxServer.ViewModels;
 using System.Net.NetworkInformation;
+using System.Net;
 
 Console.WriteLine("SandboxController");
 
@@ -25,6 +26,7 @@ MainViewModel vm = Ioc.Default.GetService<MainViewModel>()!;
 
 await vm.OnLoad();
 
+/*
 NetworkInterface selectedInterface = Prompt.Select("Select Network Interface", vm.NetworkInterfaces, textSelector: (netInterface)
     => $"{netInterface.Name} - {netInterface.GetIPProperties().UnicastAddresses.Where(y => y.Address.AddressFamily == AddressFamily.InterNetwork).Select(y => y.Address.ToString()).FirstOrDefault() ?? "(Empty)"}");
 
@@ -36,8 +38,9 @@ Console.WriteLine(port);
 
 vm.SelectedInterface = selectedInterface;
 vm.Port = port;
+*/
 
-await vm.StartServerCommand.ExecuteAsync(vm.SelectedInterface);
+await vm.StartServerAsync(IPAddress.Loopback, 8888);
 
 Console.WriteLine("Press enter to send a ping; press any other key to exit.");
 
@@ -52,8 +55,9 @@ while (true)
     }
 
     string senderName = $"ping{counter}";
-    Console.WriteLine($"Sending: {senderName}...");
-    vm.SendPingClientRequest(senderName);
+    Console.WriteLine($"Sending ping: {senderName}...");
+    string response = await vm.Controller!.AppService.PingAsync();
+    Console.WriteLine($"Ping response: {response}");
     ++counter;
 }
 
