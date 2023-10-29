@@ -11,7 +11,6 @@ public class AppConnectorApp
     private AppService _appService;
     private ILogger? _logger;
     private TcpClient? _client;
-    private NetworkStream? _stream;
 
     public AppConnectorApp(AppService appService, ILogger? logger = null)
     {
