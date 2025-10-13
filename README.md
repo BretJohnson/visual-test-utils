@@ -1,5 +1,10 @@
 # Visual Test Utils
 
+[![Deprecated](https://img.shields.io/badge/deprecated-yes-red)](https://github.com/BretJohnson/hot-preview)
+
+> [!IMPORTANT]
+> This repo is deprecated, with the visual-diff code now part of the `HotPreview.Tooling` package in the [Hot Preview](https://github.com/BretJohnson/hot-preview) repo.
+
 ***Easily add visual regression testing to your test process***
 
 | Package | Version |
