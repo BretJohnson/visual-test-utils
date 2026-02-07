@@ -7,7 +7,7 @@
     "ms-dotnettools.csharp",
     "k--kato.docomment",
     "editorconfig.editorconfig",
-    "pflannery.vscode-versionlens",
+    "legalfina.npm-version-lens",
     "davidanson.vscode-markdownlint",
     "dotjoshjohnson.xml",
     "ms-vscode-remote.remote-containers",
